@@ -1,0 +1,1 @@
+**A minimal Odoo module created for educational purposes.**
