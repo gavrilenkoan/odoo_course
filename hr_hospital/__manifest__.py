@@ -23,8 +23,8 @@
     ],
 
     'demo': [
-        # 'demo/res_partner_demo.xml',
-        # 'demo/library.book.csv',
+        'demo/hr_hospital_doctor_demo.xml',
+        'demo/hr_hospital_patient_demo.xml',
     ],
 
     'images': [
