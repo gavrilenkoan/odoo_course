@@ -17,9 +17,31 @@ Implements a basic library system with books, authors, and demo data.
 - `models/` – Python models
 - `views/` – XML views and menus
 - `security/` – access rights
+- `static/` – resources
 - `demo/` – demo data
 - `__manifest__.py` – module definition
 
-### Requirements
-- Odoo 19.0
-- PostgreSQL
+## 2. HR Hospital (Homework)
+
+A simple Odoo module created as homework for the `02-create-module` lesson.
+
+Implements a basic hospital management system with doctors, patients, diseases, and visits.
+
+### Features
+- Doctor management (`hr.hospital.doctor`)
+- Patient management (`hr.hospital.patient`)
+- Disease dictionary (`hr.hospital.disease`)
+- Visit tracking (`hr.hospital.visit`)
+- Menu structure (Hospital → Doctors / Patients / Diseases / Visits)
+- Form and list views for all models
+- Access rights for internal users (`base.group_user`)
+- Master and demo data
+
+### Structure
+- `models/` – Python models (Doctor, Patient, Disease, Visit)
+- `views/` – XML views, actions, and menus
+- `security/` – access rights (ir.model.access.csv)
+- `static/` – resources
+- `data/` – master data (diseases)
+- `demo/` – demo data (doctors, patients)
+- `__manifest__.py` – module definition
