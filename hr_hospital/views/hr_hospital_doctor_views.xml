@@ -17,7 +17,6 @@
         <field name="model">hr.hospital.doctor</field>
         <field name="arch" type="xml">
             <form>
-                <header>Info</header>
                 <sheet>
                     <group>
                         <group>
