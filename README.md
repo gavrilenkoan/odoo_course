@@ -28,10 +28,10 @@ A simple Odoo module created as homework for the `02-create-module` lesson.
 Implements a basic hospital management system with doctors, patients, diseases, and visits.
 
 ### Features
-- Doctor management (`hr.hospital.doctor`)
-- Patient management (`hr.hospital.patient`)
-- Disease dictionary (`hr.hospital.disease`)
-- Visit tracking (`hr.hospital.visit`)
+- Doctor management (`hospital.doctor`)
+- Patient management (`hospital.patient`)
+- Disease dictionary (`hospital.disease`)
+- Visit tracking (`hospital.visit`)
 - Menu structure (Hospital → Doctors / Patients / Diseases / Visits)
 - Form and list views for all models
 - Access rights for internal users (`base.group_user`)
