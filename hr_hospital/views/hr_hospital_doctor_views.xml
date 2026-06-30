@@ -8,6 +8,7 @@
                 <field name="name"/>
                 <field name="specialization"/>
                 <field name="patient_ids"/>
+                <field name="visit_ids"/>
             </list>
         </field>
     </record>
@@ -26,6 +27,7 @@
 
                         <group>
                             <field name="patient_ids"/>
+                            <field name="visit_ids"/>
                         </group>
                     </group>
                 </sheet>

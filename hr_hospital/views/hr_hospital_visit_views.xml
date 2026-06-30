@@ -8,6 +8,7 @@
                 <field name="name"/>
                 <field name="patient_id"/>
                 <field name="doctor_id"/>
+                <field name="disease_id"/>
                 <field name="visit_date"/>
                 <field name="notes"/>
             </list>
@@ -25,6 +26,7 @@
                             <field name="name"/>
                             <field name="patient_id"/>
                             <field name="doctor_id"/>
+                            <field name="disease_id"/>
                         </group>
 
                         <group>

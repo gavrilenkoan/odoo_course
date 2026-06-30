@@ -15,3 +15,9 @@ class HRHospitalDoctor(models.Model):
         inverse_name='doctor_id',
         string='Patients',
     )
+
+    visit_ids = fields.One2many(
+        comodel_name='hospital.visit',
+        inverse_name='doctor_id',
+        string='Visits',
+    )

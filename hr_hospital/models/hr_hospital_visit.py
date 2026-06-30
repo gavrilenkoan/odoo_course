@@ -20,6 +20,11 @@ class HRHospitalVisit(models.Model):
         required=True,
     )
 
+    disease_id = fields.Many2one(
+        comodel_name='hospital.disease',
+        string='Disease',
+    )
+
     visit_date = fields.Datetime(
         string='Visit Date',
         default=fields.Datetime.now,
