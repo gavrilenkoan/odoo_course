@@ -1,0 +1,18 @@
+<odoo>
+
+    <record id="disease_flu" model="hospital.disease">
+        <field name="name">Flu</field>
+        <field name="description">Influenza, viral infection affecting respiratory system</field>
+    </record>
+
+    <record id="disease_covid" model="hospital.disease">
+        <field name="name">COVID-19</field>
+        <field name="description">Coronavirus infectious disease</field>
+    </record>
+
+    <record id="disease_diabetes" model="hospital.disease">
+        <field name="name">Diabetes</field>
+        <field name="description">Chronic disease affecting blood sugar regulation</field>
+    </record>
+
+</odoo>

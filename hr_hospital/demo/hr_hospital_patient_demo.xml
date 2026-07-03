@@ -1,0 +1,18 @@
+<odoo>
+
+    <record id="patient_1" model="hospital.patient">
+        <field name="name">John Doe</field>
+        <field name="doctor_id" ref="doctor_1"/>
+    </record>
+
+    <record id="patient_2" model="hospital.patient">
+        <field name="name">Jane Smith</field>
+        <field name="doctor_id" ref="doctor_2"/>
+    </record>
+
+    <record id="patient_3" model="hospital.patient">
+        <field name="name">Mike Brown</field>
+        <field name="doctor_id" ref="doctor_3"/>
+    </record>
+
+</odoo>

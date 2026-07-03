@@ -1,0 +1,18 @@
+<odoo>
+
+    <record id="doctor_1" model="hospital.doctor">
+        <field name="name">Dr. Gregory House</field>
+        <field name="specialization">Diagnostics</field>
+    </record>
+
+    <record id="doctor_2" model="hospital.doctor">
+        <field name="name">Dr. James Wilson</field>
+        <field name="specialization">Oncology</field>
+    </record>
+
+    <record id="doctor_3" model="hospital.doctor">
+        <field name="name">Dr. Stephen Strange</field>
+        <field name="specialization">Surgery</field>
+    </record>
+
+</odoo>
