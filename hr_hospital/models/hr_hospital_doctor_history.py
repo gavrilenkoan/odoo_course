@@ -43,3 +43,12 @@ class HRHospitalDoctorHistory(models.Model):
             date = record.assignment_date or ''
 
             record.display_name = f'{patient} - {doctor} ({category}) {date}'
+
+    def unlink(self):
+        for record in self:
+            if not record.change_date:
+                record.patient_id.write({
+                    'doctor_id': False,
+                })
+
+        return super().unlink()
