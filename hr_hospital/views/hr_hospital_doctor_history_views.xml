@@ -20,11 +20,11 @@
             <form>
                 <sheet>
                     <group>
-                        <group>
+                        <group string="Participants">
                             <field name="patient_id"/>
                             <field name="doctor_id"/>
                         </group>
-                        <group>
+                        <group string="Date Changes">
                             <field name="assignment_date"/>
                             <field name="change_date"/>
                         </group>
