@@ -22,6 +22,11 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
+                    <header>
+                        <button name="%(action_mass_reassign_doctor_wizard)d"
+                                string="Reassign Doctor"
+                                type="action"/>
+                    </header>
                     <group>
                         <group string="Patient Information">
                             <field name="name"/>
