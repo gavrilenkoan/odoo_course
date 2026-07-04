@@ -1,4 +1,5 @@
 from odoo import api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class HRHospitalDoctorHistory(models.Model):
@@ -32,13 +33,7 @@ class HRHospitalDoctorHistory(models.Model):
     @api.onchange('assignment_date', 'change_date')
     def _onchange_dates(self):
         if self.assignment_date and self.change_date and self.change_date < self.assignment_date:
-            return {
-                'warning': {
-                    'title': 'Warning',
-                    'message': 'The date of the change of the doctor cannot be earlier than the date of the assignment.',
-                }
-            }
-        return None
+            raise ValidationError('The date of the change of the doctor cannot be earlier than the date of the assignment.')
 
     def _compute_display_name(self):
         for record in self:

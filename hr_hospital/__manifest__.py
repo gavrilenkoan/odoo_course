@@ -28,6 +28,7 @@
     'demo': [
         'demo/hr_hospital_doctor_demo.xml',
         'demo/hr_hospital_patient_demo.xml',
+        'demo/hr_hospital_visit_demo.xml',
         'demo/hr_hospital_doctor_history_demo.xml',
     ],
 

@@ -8,8 +8,12 @@
                 <field name="name"/>
                 <field name="specialization"/>
                 <field name="category_id"/>
-                <field name="patient_ids"/>
-                <field name="visit_ids"/>
+                <field name="mentor_id"/>
+                <field name="user_id"/>
+                <field name="blood_group"/>
+                <field name="gender"/>
+                <field name="birth_date"/>
+                <field name="age"/>
             </list>
         </field>
     </record>
@@ -21,13 +25,23 @@
             <form>
                 <sheet>
                     <group>
-                        <group>
+                        <group string="Doctor Information">
                             <field name="name"/>
                             <field name="specialization"/>
                             <field name="category_id"/>
+                            <field name="mentor_id"
+                                   domain="[('is_intern', '=', False)]"
+                                   invisible="not is_intern"
+                                   required="is_intern"/>
+                            <field name="user_id"/>
                         </group>
-
-                        <group>
+                        <group string="Medical Information">
+                            <field name="blood_group"/>
+                            <field name="gender"/>
+                            <field name="birth_date"/>
+                            <field name="age"/>
+                        </group>
+                        <group string="History">
                             <field name="patient_ids"/>
                             <field name="visit_ids"/>
                         </group>
