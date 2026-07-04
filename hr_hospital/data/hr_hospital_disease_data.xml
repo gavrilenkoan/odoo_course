@@ -2,15 +2,24 @@
 
     <record id="disease_respiratory" model="hospital.disease">
         <field name="name">Respiratory Diseases</field>
+        <field name="description">
+            Diseases affecting the lungs and respiratory tract
+        </field>
     </record>
 
     <record id="disease_metabolic" model="hospital.disease">
         <field name="name">Metabolic Diseases</field>
+        <field name="description">
+            Disorders that affect the body's metabolism and energy regulation
+        </field>
     </record>
 
     <record id="disease_viral" model="hospital.disease">
         <field name="name">Viral Diseases</field>
         <field name="parent_id" ref="disease_respiratory"/>
+        <field name="description">
+            Infectious diseases caused by viruses
+        </field>
     </record>
 
     <record id="disease_flu" model="hospital.disease">
