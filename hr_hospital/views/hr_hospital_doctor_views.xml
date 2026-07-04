@@ -7,6 +7,7 @@
             <list>
                 <field name="name"/>
                 <field name="specialization"/>
+                <field name="category_id"/>
                 <field name="patient_ids"/>
                 <field name="visit_ids"/>
             </list>
@@ -23,6 +24,7 @@
                         <group>
                             <field name="name"/>
                             <field name="specialization"/>
+                            <field name="category_id"/>
                         </group>
 
                         <group>

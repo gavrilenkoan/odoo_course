@@ -9,6 +9,10 @@ class HRHospitalDoctor(models.Model):
     active = fields.Boolean(default=True)
 
     specialization = fields.Text()
+    category_id = fields.Many2one(
+        comodel_name='hospital.doctor.category',
+        string='Qualification',
+    )
 
     patient_ids = fields.One2many(
         comodel_name='hospital.patient',

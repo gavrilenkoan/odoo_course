@@ -3,16 +3,19 @@
     <record id="doctor_1" model="hospital.doctor">
         <field name="name">Dr. Gregory House</field>
         <field name="specialization">Diagnostics</field>
+        <field name="category_id" ref="doctor_category_specialist"/>
     </record>
 
     <record id="doctor_2" model="hospital.doctor">
         <field name="name">Dr. James Wilson</field>
         <field name="specialization">Oncology</field>
+        <field name="category_id" ref="doctor_category_intern"/>
     </record>
 
     <record id="doctor_3" model="hospital.doctor">
         <field name="name">Dr. Stephen Strange</field>
         <field name="specialization">Surgery</field>
+        <field name="category_id" ref="doctor_category_highest"/>
     </record>
 
 </odoo>

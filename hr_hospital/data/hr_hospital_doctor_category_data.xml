@@ -1,0 +1,18 @@
+<odoo>
+
+    <record id="doctor_category_intern" model="hospital.doctor.category">
+        <field name="name">Intern</field>
+        <field name="sequence">100</field>
+    </record>
+
+    <record id="doctor_category_specialist" model="hospital.doctor.category">
+        <field name="name">Specialist</field>
+        <field name="sequence">200</field>
+    </record>
+
+    <record id="doctor_category_highest" model="hospital.doctor.category">
+        <field name="name">Highest Category</field>
+        <field name="sequence">300</field>
+    </record>
+
+</odoo>

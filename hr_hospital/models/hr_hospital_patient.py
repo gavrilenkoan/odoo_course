@@ -18,3 +18,9 @@ class HRHospitalPatient(models.Model):
         inverse_name='patient_id',
         string='Visits',
     )
+
+    history_ids = fields.One2many(
+        comodel_name='hospital.doctor.history',
+        inverse_name='patient_id',
+        string='Doctor History',
+    )
