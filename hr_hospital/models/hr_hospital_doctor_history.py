@@ -30,7 +30,60 @@ class HRHospitalDoctorHistory(models.Model):
 
     active = fields.Boolean(default=True)
 
-    @api.onchange('assignment_date', 'change_date')
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = super().create(vals_list)
+
+        if self.env.context.get('skip_history_sync'):
+            return records
+
+        for record in records:
+            if record.change_date:
+                continue
+
+            previous = self.search([
+                ('patient_id', '=', record.patient_id.id),
+                ('id', '!=', record.id),
+                ('change_date', '=', False),
+            ], limit=1)
+
+            previous.with_context(skip_history_sync=True).write({
+                'change_date': fields.Date.today(),
+            })
+            (record.patient_id.with_context(skip_history_sync=True).write(
+                {'doctor_id': record.doctor_id.id}
+            ))
+
+        return records
+
+    def write(self, vals):
+        was_active = {record.id: not record.change_date for record in self}
+
+        res = super().write(vals)
+
+        for record in self:
+            if 'change_date' in vals and was_active[record.id] and record.change_date:
+                record.patient_id.with_context(skip_history_sync=True).write({
+                    'doctor_id': False,
+                })
+
+            elif 'doctor_id' in vals and was_active[record.id]:
+                record.patient_id.with_context(skip_history_sync=True).write({
+                    'doctor_id': record.doctor_id.id,
+                })
+
+        return res
+
+    def unlink(self):
+        for record in self:
+            if not record.change_date:
+                record.patient_id.with_context(skip_history_sync=True).write({
+                    'doctor_id': False,
+                })
+
+        return super().unlink()
+
+    @api.constrains("assignment_date", "change_date")
     def _onchange_dates(self):
         if self.assignment_date and self.change_date and self.change_date < self.assignment_date:
             raise ValidationError('The date of the change of the doctor cannot be earlier than the date of the assignment.')
@@ -43,12 +96,3 @@ class HRHospitalDoctorHistory(models.Model):
             date = record.assignment_date or ''
 
             record.display_name = f'{patient} - {doctor} ({category}) {date}'
-
-    def unlink(self):
-        for record in self:
-            if not record.change_date:
-                record.patient_id.write({
-                    'doctor_id': False,
-                })
-
-        return super().unlink()
