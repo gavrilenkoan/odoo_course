@@ -30,6 +30,27 @@ class HRHospitalDoctorHistory(models.Model):
 
     active = fields.Boolean(default=True)
 
+    @api.model
+    def _get_current_history(self, patient):
+        today = fields.Date.today()
+
+        return self.search(
+            [
+                ('patient_id', '=', patient.id),
+                ('assignment_date', '<=', today),
+                '|',
+                ('change_date', '=', False),
+                ('change_date', '>', today),
+            ],
+            order='assignment_date desc, id desc',
+            limit=1,
+        )
+
+    def _is_current(self):
+        self.ensure_one()
+        today = fields.Date.today()
+        return self.assignment_date <= today and (not self.change_date or self.change_date > today)
+
     @api.model_create_multi
     def create(self, vals_list):
         records = super().create(vals_list)
@@ -38,36 +59,36 @@ class HRHospitalDoctorHistory(models.Model):
             return records
 
         for record in records:
-            if record.change_date:
+            if not record._is_current():
                 continue
 
-            previous = self.search([
-                ('patient_id', '=', record.patient_id.id),
-                ('id', '!=', record.id),
-                ('change_date', '=', False),
-            ], limit=1)
+            previous = self._get_current_history(record.patient_id)
 
-            previous.with_context(skip_history_sync=True).write({
-                'change_date': fields.Date.today(),
+            if previous and previous != record:
+                previous.with_context(skip_history_sync=True).write({
+                    'change_date': fields.Date.today(),
+                })
+
+            record.patient_id.with_context(skip_history_sync=True).write({
+                'doctor_id': record.doctor_id.id,
             })
-            (record.patient_id.with_context(skip_history_sync=True).write(
-                {'doctor_id': record.doctor_id.id}
-            ))
 
         return records
 
     def write(self, vals):
-        was_active = {record.id: not record.change_date for record in self}
+        was_active = {record.id: record._is_current() for record in self}
 
         res = super().write(vals)
 
         for record in self:
-            if 'change_date' in vals and was_active[record.id] and record.change_date:
+            is_active = record._is_current()
+
+            if was_active[record.id] and not is_active:
                 record.patient_id.with_context(skip_history_sync=True).write({
                     'doctor_id': False,
                 })
 
-            elif 'doctor_id' in vals and was_active[record.id]:
+            elif (not was_active[record.id] and is_active) or (is_active and 'doctor_id' in vals):
                 record.patient_id.with_context(skip_history_sync=True).write({
                     'doctor_id': record.doctor_id.id,
                 })
@@ -76,7 +97,7 @@ class HRHospitalDoctorHistory(models.Model):
 
     def unlink(self):
         for record in self:
-            if not record.change_date:
+            if record._is_current():
                 record.patient_id.with_context(skip_history_sync=True).write({
                     'doctor_id': False,
                 })
@@ -84,7 +105,7 @@ class HRHospitalDoctorHistory(models.Model):
         return super().unlink()
 
     @api.constrains("assignment_date", "change_date")
-    def _onchange_dates(self):
+    def _check_dates(self):
         if self.assignment_date and self.change_date and self.change_date < self.assignment_date:
             raise ValidationError('The date of the change of the doctor cannot be earlier than the date of the assignment.')
 

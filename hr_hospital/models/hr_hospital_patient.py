@@ -52,10 +52,7 @@ class HRHospitalPatient(models.Model):
 
             changed_patients |= patient
 
-            current_history = history_model.search([
-                ('patient_id', '=', patient.id),
-                ('change_date', '=', False),
-            ], limit=1)
+            current_history = history_model._get_current_history(patient)
 
             if current_history:
                 current_history.write({'change_date': change_date})
