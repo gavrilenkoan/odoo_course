@@ -26,6 +26,8 @@
 
         'data/hr_hospital_disease_data.xml',
         'data/hr_hospital_doctor_category_data.xml',
+
+        'data/hr_hospital_cron.xml',
     ],
 
     'demo': [

@@ -28,6 +28,23 @@ class HRHospitalDoctor(models.Model):
         store=True,
     )
 
+    mentor_id = fields.Many2one(
+        comodel_name='hospital.doctor',
+        string='Mentor',
+    )
+
+    patient_ids = fields.One2many(
+        comodel_name='hospital.patient',
+        inverse_name='doctor_id',
+        string='Patients',
+    )
+
+    visit_ids = fields.One2many(
+        comodel_name='hospital.visit',
+        inverse_name='doctor_id',
+        string='Visits',
+    )
+
     @api.depends('category_id')
     def _compute_is_intern(self):
         intern = self.env.ref(
@@ -37,11 +54,6 @@ class HRHospitalDoctor(models.Model):
 
         for record in self:
             record.is_intern = bool(intern and record.category_id == intern)
-
-    mentor_id = fields.Many2one(
-        comodel_name='hospital.doctor',
-        string='Mentor',
-    )
 
     @api.onchange('category_id')
     def _onchange_category_id(self):
@@ -56,15 +68,3 @@ class HRHospitalDoctor(models.Model):
 
             if record.is_intern and not record.mentor_id:
                 raise ValidationError('An intern must have a mentor.')
-
-    patient_ids = fields.One2many(
-        comodel_name='hospital.patient',
-        inverse_name='doctor_id',
-        string='Patients',
-    )
-
-    visit_ids = fields.One2many(
-        comodel_name='hospital.visit',
-        inverse_name='doctor_id',
-        string='Visits',
-    )

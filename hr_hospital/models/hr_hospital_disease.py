@@ -29,11 +29,6 @@ class HRHospitalDisease(models.Model):
         index=True,
     )
 
-    @api.constrains('parent_id')
-    def _check_parent(self):
-        if not self._check_recursion():
-            raise ValidationError('Recursive disease hierarchy is not allowed.')
-
     def _compute_display_name(self):
         for record in self:
             names = []
@@ -44,3 +39,8 @@ class HRHospitalDisease(models.Model):
                 current = current.parent_id
 
             record.display_name = ' / '.join(reversed(names))
+
+    @api.constrains('parent_id')
+    def _check_parent(self):
+        if not self._check_recursion():
+            raise ValidationError('Recursive disease hierarchy is not allowed.')
