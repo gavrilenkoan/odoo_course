@@ -1,0 +1,65 @@
+<odoo>
+
+    <record id="view_visit_report_wizard_form" model="ir.ui.view">
+        <field name="name">visit.report.wizard.form</field>
+        <field name="model">visit.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Visit Report">
+                <group>
+                    <field name="doctor_ids" widget="many2many_tags"/>
+                    <field name="patient_ids" widget="many2many_tags"/>
+                    <field name="disease_id"/>
+                    <field name="completed_only"/>
+                </group>
+
+                <group>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                </group>
+
+                <footer>
+                    <button
+                        name="action_generate_report"
+                        type="object"
+                        string="Generate Report"
+                        class="btn-primary"/>
+
+                    <button
+                        string="Cancel"
+                        special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_visit_report_wizard" model="ir.actions.act_window">
+        <field name="name">Visit Report</field>
+        <field name="res_model">visit.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_visit_report_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <record id="action_visit_report_doctor" model="ir.actions.server">
+        <field name="name">Visit Report</field>
+        <field name="model_id" ref="model_hospital_doctor"/>
+        <field name="binding_model_id" ref="model_hospital_doctor"/>
+        <field name="binding_type">action</field>
+        <field name="state">code</field>
+        <field name="code">
+            action = env["ir.actions.actions"]._for_xml_id("hr_hospital.action_visit_report_wizard")
+        </field>
+    </record>
+
+    <record id="action_visit_report_patient" model="ir.actions.server">
+        <field name="name">Visit Report</field>
+        <field name="model_id" ref="model_hospital_patient"/>
+        <field name="binding_model_id" ref="model_hospital_patient"/>
+        <field name="binding_type">action</field>
+        <field name="state">code</field>
+        <field name="code">
+            action = env["ir.actions.actions"]._for_xml_id("hr_hospital.action_visit_report_wizard")
+        </field>
+    </record>
+
+</odoo>

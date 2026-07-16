@@ -6,11 +6,12 @@
         <field name="arch" type="xml">
             <list>
                 <field name="name"/>
-                <field name="patient_id"/>
+                <field name="status"/>
+                <field name="scheduled_datetime"/>
+                <field name="visit_datetime"/>
                 <field name="doctor_id"/>
+                <field name="patient_id"/>
                 <field name="disease_id"/>
-                <field name="visit_date"/>
-                <field name="notes"/>
             </list>
         </field>
     </record>
@@ -22,16 +23,25 @@
             <form>
                 <sheet>
                     <group>
-                        <group>
+                        <group string="Visit Information">
                             <field name="name"/>
-                            <field name="patient_id"/>
-                            <field name="doctor_id"/>
-                            <field name="disease_id"/>
+                            <field name="status"/>
+                            <field name="scheduled_datetime"
+                                   readonly="status == 'done'"/>
                         </group>
-
-                        <group>
-                            <field name="visit_date"/>
-                            <field name="notes"/>
+                        <group string="Participants">
+                            <field name="doctor_id"
+                                   readonly="status == 'done'"/>
+                            <field name="patient_id"
+                                   readonly="status == 'done'"/>
+                        </group>
+                        <group string="Summary">
+                            <field name="visit_datetime"
+                                   readonly="status == 'done'"/>
+                            <field name="disease_id"
+                                   readonly="status == 'done'"/>
+                            <field name="summary"
+                                   readonly="status == 'done'"/>
                         </group>
                     </group>
                 </sheet>

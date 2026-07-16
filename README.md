@@ -1,8 +1,6 @@
 # Odoo Learning Modules
 
-## 2. Create Module
-
-A simple Odoo module created as part of the `02-create-module` lesson.
+## Library
 
 Implements a basic library system with books, authors, and demo data.
 
@@ -21,27 +19,31 @@ Implements a basic library system with books, authors, and demo data.
 - `demo/` – demo data
 - `__manifest__.py` – module definition
 
-## 2. HR Hospital (Homework)
+## HR Hospital (Homework)
 
-A simple Odoo module created as homework for the `02-create-module` lesson.
-
-Implements a basic hospital management system with doctors, patients, diseases, and visits.
+Implements a hospital management system for managing doctors, patients, diseases, visits, and doctor assignment history.
 
 ### Features
 - Doctor management (`hospital.doctor`)
 - Patient management (`hospital.patient`)
 - Disease dictionary (`hospital.disease`)
-- Visit tracking (`hospital.visit`)
+- Visit management (`hospital.visit`)
+- Doctor assignment history (`hospital.doctor.history`)
+- Doctor categories and mentor support for interns
+- Automatic synchronization between Patient and Doctor History
+- Mass doctor reassignment wizard
+- Visit report wizard with filtering by doctor, patient, disease, status, and date range
 - Menu structure (Hospital → Doctors / Patients / Diseases / Visits)
 - Form and list views for all models
 - Access rights for internal users (`base.group_user`)
 - Master and demo data
 
 ### Structure
-- `models/` – Python models (Doctor, Patient, Disease, Visit)
-- `views/` – XML views, actions, and menus
-- `security/` – access rights (ir.model.access.csv)
+- `models/` – Python models (Doctor, Patient, Disease, Visit, Doctor History, Doctor Category)
+- `wizard/` – Transient models for mass doctor reassignment and visit reports
+- `views/` – XML views, actions, menus, and wizard views
+- `security/` – access rights (`ir.model.access.csv`)
+- `data/` – master data (doctor categories, diseases)
+- `demo/` – demo data (doctors, patients, visits)
 - `static/` – resources
-- `data/` – master data (diseases)
-- `demo/` – demo data (doctors, patients)
 - `__manifest__.py` – module definition

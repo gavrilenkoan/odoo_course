@@ -1,0 +1,17 @@
+<odoo>
+
+    <record id="ir_cron_sync_current_doctors" model="ir.cron">
+        <field name="name">Synchronize Current Doctors</field>
+
+        <field name="model_id" ref="model_hospital_doctor_history"/>
+
+        <field name="state">code</field>
+        <field name="code">model.cron_sync_current_doctors()</field>
+
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+
+        <field name="active">True</field>
+    </record>
+
+</odoo>

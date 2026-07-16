@@ -3,16 +3,29 @@
     <record id="doctor_1" model="hospital.doctor">
         <field name="name">Dr. Gregory House</field>
         <field name="specialization">Diagnostics</field>
-    </record>
-
-    <record id="doctor_2" model="hospital.doctor">
-        <field name="name">Dr. James Wilson</field>
-        <field name="specialization">Oncology</field>
+        <field name="category_id" ref="doctor_category_specialist"/>
+        <field name="blood_group">a_pos</field>
+        <field name="gender">male</field>
+        <field name="birth_date">1970-05-15</field>
     </record>
 
     <record id="doctor_3" model="hospital.doctor">
         <field name="name">Dr. Stephen Strange</field>
         <field name="specialization">Surgery</field>
+        <field name="category_id" ref="doctor_category_highest"/>
+        <field name="blood_group">ab_neg</field>
+        <field name="gender">male</field>
+        <field name="birth_date">1976-02-18</field>
+    </record>
+
+    <record id="doctor_2" model="hospital.doctor">
+        <field name="name">Dr. James Wilson</field>
+        <field name="specialization">Oncology</field>
+        <field name="category_id" ref="doctor_category_intern"/>
+        <field name="mentor_id" ref="doctor_3"/>
+        <field name="blood_group">o_pos</field>
+        <field name="gender">male</field>
+        <field name="birth_date">1998-08-10</field>
     </record>
 
 </odoo>

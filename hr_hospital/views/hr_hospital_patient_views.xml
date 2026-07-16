@@ -7,7 +7,11 @@
             <list>
                 <field name="name"/>
                 <field name="doctor_id"/>
-                <field name="visit_ids"/>
+                <field name="insurance_policy_number"/>
+                <field name="blood_group"/>
+                <field name="gender"/>
+                <field name="birth_date"/>
+                <field name="age"/>
             </list>
         </field>
     </record>
@@ -17,14 +21,28 @@
         <field name="model">hospital.patient</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                        <button name="%(action_mass_reassign_doctor_wizard)d"
+                                string="Reassign Doctor"
+                                type="action"
+                                class="btn-primary"/>
+                    </header>
                 <sheet>
                     <group>
-                        <group>
+                        <group string="Patient Information">
                             <field name="name"/>
                             <field name="doctor_id"/>
+                            <field name="insurance_policy_number"/>
                         </group>
-                        <group>
+                        <group string="Medical Information">
+                            <field name="blood_group"/>
+                            <field name="gender"/>
+                            <field name="birth_date"/>
+                            <field name="age"/>
+                        </group>
+                        <group string="History">
                             <field name="visit_ids"/>
+                            <field name="history_ids"/>
                         </group>
                     </group>
                 </sheet>

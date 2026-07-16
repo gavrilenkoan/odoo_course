@@ -1,0 +1,68 @@
+<odoo>
+
+    <record id="visit_1" model="hospital.visit">
+        <field name="name">Visit #1</field>
+        <field name="status">done</field>
+        <field name="scheduled_datetime">2026-01-15 09:00:00</field>
+        <field name="visit_datetime">2026-01-15 09:10:00</field>
+        <field name="doctor_id" ref="doctor_1"/>
+        <field name="patient_id" ref="patient_1"/>
+        <field name="disease_id" ref="disease_flu"/>
+        <field name="summary"><![CDATA[
+            <p>Patient recovered successfully.</p>
+        ]]></field>
+    </record>
+
+    <record id="visit_2" model="hospital.visit">
+        <field name="name">Visit #2</field>
+        <field name="status">planned</field>
+        <field name="scheduled_datetime">2026-08-20 14:00:00</field>
+        <field name="doctor_id" ref="doctor_3"/>
+        <field name="patient_id" ref="patient_1"/>
+        <field name="disease_id" ref="disease_diabetes"/>
+    </record>
+
+    <record id="visit_3" model="hospital.visit">
+        <field name="name">Visit #3</field>
+        <field name="status">done</field>
+        <field name="scheduled_datetime">2026-02-15 11:00:00</field>
+        <field name="visit_datetime">2026-02-15 11:05:00</field>
+        <field name="doctor_id" ref="doctor_2"/>
+        <field name="patient_id" ref="patient_2"/>
+        <field name="disease_id" ref="disease_covid"/>
+        <field name="summary"><![CDATA[
+            <p>Mild symptoms.</p>
+        ]]></field>
+    </record>
+
+    <record id="visit_4" model="hospital.visit">
+        <field name="name">Visit #4</field>
+        <field name="status">cancelled</field>
+        <field name="scheduled_datetime">2026-03-18 10:00:00</field>
+        <field name="doctor_id" ref="doctor_2"/>
+        <field name="patient_id" ref="patient_2"/>
+    </record>
+
+    <record id="visit_5" model="hospital.visit">
+        <field name="name">Visit #5</field>
+        <field name="status">planned</field>
+        <field name="scheduled_datetime">2026-08-25 15:30:00</field>
+        <field name="doctor_id" ref="doctor_3"/>
+        <field name="patient_id" ref="patient_3"/>
+        <field name="disease_id" ref="disease_diabetes"/>
+    </record>
+
+    <record id="visit_6" model="hospital.visit">
+        <field name="name">Visit #6</field>
+        <field name="status">done</field>
+        <field name="scheduled_datetime">2026-04-01 08:30:00</field>
+        <field name="visit_datetime">2026-04-01 08:45:00</field>
+        <field name="doctor_id" ref="doctor_1"/>
+        <field name="patient_id" ref="patient_3"/>
+        <field name="disease_id" ref="disease_flu"/>
+        <field name="summary"><![CDATA[
+            <p>Routine examination completed.</p>
+        ]]></field>
+    </record>
+
+</odoo>

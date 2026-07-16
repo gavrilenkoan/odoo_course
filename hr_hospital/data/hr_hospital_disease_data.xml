@@ -1,18 +1,57 @@
 <odoo>
 
+    <record id="disease_respiratory" model="hospital.disease">
+        <field name="name">Respiratory Diseases</field>
+        <field name="description">
+            Diseases affecting the lungs and respiratory tract
+        </field>
+    </record>
+
+    <record id="disease_metabolic" model="hospital.disease">
+        <field name="name">Metabolic Diseases</field>
+        <field name="description">
+            Disorders that affect the body's metabolism and energy regulation
+        </field>
+    </record>
+
+    <record id="disease_viral" model="hospital.disease">
+        <field name="name">Viral Diseases</field>
+        <field name="parent_id" ref="disease_respiratory"/>
+        <field name="description">
+            Infectious diseases caused by viruses
+        </field>
+    </record>
+
     <record id="disease_flu" model="hospital.disease">
         <field name="name">Flu</field>
-        <field name="description">Influenza, viral infection affecting respiratory system</field>
+        <field name="parent_id" ref="disease_viral"/>
+        <field name="description">
+            Influenza, viral infection affecting respiratory system
+        </field>
     </record>
 
     <record id="disease_covid" model="hospital.disease">
         <field name="name">COVID-19</field>
-        <field name="description">Coronavirus infectious disease</field>
+        <field name="parent_id" ref="disease_viral"/>
+        <field name="description">
+            Coronavirus infectious disease
+        </field>
     </record>
 
     <record id="disease_diabetes" model="hospital.disease">
         <field name="name">Diabetes</field>
-        <field name="description">Chronic disease affecting blood sugar regulation</field>
+        <field name="parent_id" ref="disease_metabolic"/>
+        <field name="description">
+            Chronic disease affecting blood sugar regulation
+        </field>
+    </record>
+
+    <record id="disease_obesity" model="hospital.disease">
+        <field name="name">Obesity</field>
+        <field name="parent_id" ref="disease_metabolic"/>
+        <field name="description">
+            Chronic disease characterized by excessive body fat accumulation.
+        </field>
     </record>
 
 </odoo>
