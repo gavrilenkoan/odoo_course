@@ -30,7 +30,7 @@
                 <sheet>
                     <group>
                         <group string="Patient Information">
-                            <field name="name" readonly="1"/>
+                            <field name="name"/>
                             <field name="doctor_id"/>
                             <field name="insurance_policy_number"/>
                         </group>
