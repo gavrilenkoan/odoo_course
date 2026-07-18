@@ -1,6 +1,7 @@
 <odoo>
 
     <record id="doctor_1" model="hospital.doctor">
+        <field name="image_url">https://upload.wikimedia.org/wikipedia/en/0/0b/HouseGregoryHouse.png</field>
         <field name="name">Dr. Gregory House</field>
         <field name="specialization">Diagnostics</field>
         <field name="category_id" ref="doctor_category_specialist"/>
@@ -10,6 +11,7 @@
     </record>
 
     <record id="doctor_3" model="hospital.doctor">
+        <field name="image_url">https://i.pinimg.com/474x/94/a6/66/94a666d648af0de5adb025828cd998a0.jpg</field>
         <field name="name">Dr. Stephen Strange</field>
         <field name="specialization">Surgery</field>
         <field name="category_id" ref="doctor_category_highest"/>
@@ -19,6 +21,7 @@
     </record>
 
     <record id="doctor_2" model="hospital.doctor">
+        <field name="image_url">https://upload.wikimedia.org/wikipedia/en/8/80/Jameswilsonpromoseason6.jpg</field>
         <field name="name">Dr. James Wilson</field>
         <field name="specialization">Oncology</field>
         <field name="category_id" ref="doctor_category_intern"/>
@@ -26,6 +29,37 @@
         <field name="blood_group">o_pos</field>
         <field name="gender">male</field>
         <field name="birth_date">1998-08-10</field>
+    </record>
+
+    <record id="doctor_4" model="hospital.doctor">
+        <field name="image_url">https://i.pinimg.com/originals/a0/ea/94/a0ea94334c98fc038e2b6573103a9229.jpg?nii=t</field>
+        <field name="name">Dr. Eric Foreman</field>
+        <field name="specialization">Neurology</field>
+        <field name="category_id" ref="doctor_category_intern"/>
+        <field name="mentor_id" ref="doctor_1"/>
+        <field name="blood_group">b_pos</field>
+        <field name="gender">male</field>
+        <field name="birth_date">1999-04-22</field>
+    </record>
+
+    <record id="doctor_5" model="hospital.doctor">
+        <field name="image_url">https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5sn19moE4KtSJau-hPYE45ezcdHjl9pYy4_z5bLqDdQ&amp;s=10</field>
+        <field name="name">Dr. Allison Cameron</field>
+        <field name="specialization">Immunology</field>
+        <field name="category_id" ref="doctor_category_intern"/>
+        <field name="mentor_id" ref="doctor_3"/>
+        <field name="blood_group">a_pos</field>
+        <field name="gender">female</field>
+        <field name="birth_date">2000-01-30</field>
+    </record>
+
+    <record id="doctor_6" model="hospital.doctor">
+        <field name="name">Dr. Robert Chase</field>
+        <field name="specialization">Intensive Care</field>
+        <field name="category_id" ref="doctor_category_specialist"/>
+        <field name="blood_group">o_neg</field>
+        <field name="gender">male</field>
+        <field name="birth_date">1982-09-07</field>
     </record>
 
 </odoo>
