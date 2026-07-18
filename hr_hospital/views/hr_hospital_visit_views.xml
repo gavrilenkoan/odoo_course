@@ -109,6 +109,12 @@
                 <filter name="filter_cancelled" string="Cancelled"
                         domain="[('status', '=', 'cancelled')]"/>
 
+                <separator/>
+
+                <filter name="filter_this_year" string="This Year"
+                        domain="[('scheduled_datetime', '&gt;=', context_today().strftime('%Y-01-01 00:00:00')),
+                                 ('scheduled_datetime', '&lt;=', context_today().strftime('%Y-12-31 23:59:59'))]"/>
+
                 <group>
                     <filter name="group_status" string="Status"
                             context="{'group_by': 'status'}"/>
@@ -154,10 +160,7 @@
         <field name="res_model">hospital.visit</field>
         <field name="view_mode">list,form,calendar,pivot,graph</field>
         <field name="search_view_id" ref="hospital_visit_search_view"/>
-        <field name="domain">
-            [('scheduled_datetime', '>=', '2026-01-01'),
-            ('scheduled_datetime', '&lt;', '2027-01-01')]
-        </field>
+        <field name="domain">[]</field>
     </record>
 
     <menuitem id="menu_visits"
