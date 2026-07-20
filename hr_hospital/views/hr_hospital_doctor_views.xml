@@ -86,6 +86,7 @@
                                    options="{'size': [64, 100]}" class="me-3"/>
                             <div class="flex-grow-1">
                                 <strong class="fs-5"><field name="name"/></strong>
+                                <div>Specialization: <field name="specialization"/></div>
                                 <div>Qualification: <field name="category_id"/></div>
                                 <div t-if="record.mentor_id.raw_value" class="text-muted">
                                     Mentor: <field name="mentor_id"/>
