@@ -46,4 +46,8 @@ Implements a hospital management system for managing doctors, patients, diseases
 - `data/` – master data (doctor categories, diseases)
 - `demo/` – demo data (doctors, patients, visits)
 - `static/` – resources
+- `report/` – report templates
 - `__manifest__.py` – module definition
+
+### Report Example
+![img.png](img.png)

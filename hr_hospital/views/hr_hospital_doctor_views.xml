@@ -26,7 +26,7 @@
                 <sheet>
                     <group>
                         <group string="Doctor Information">
-                            <field name="image_url" widget="image_url" options="{'size': [128, 128]}"/>
+                            <field name="image_url" widget="image_url" options="{'size': [128, 250]}"/>
                             <field name="name"/>
                             <field name="specialization"/>
                             <field name="category_id"/>
@@ -78,25 +78,32 @@
             <kanban default_group_by="category_id">
                 <field name="mentor_id"/>
                 <field name="image_url"/>
+                <field name="intern_ids"/>
                 <templates>
                     <t t-name="card">
                         <div class="d-flex">
                             <field name="image_url" widget="image_url"
-                                   options="{'size': [64, 64]}" class="me-3"/>
+                                   options="{'size': [64, 100]}" class="me-3"/>
                             <div class="flex-grow-1">
                                 <strong class="fs-5"><field name="name"/></strong>
-                                <div><field name="specialization"/></div>
+                                <div>Qualification: <field name="category_id"/></div>
                                 <div t-if="record.mentor_id.raw_value" class="text-muted">
                                     Mentor: <field name="mentor_id"/>
+                                </div>
+                                <div t-if="record.intern_ids.raw_value.length">
+                                    Interns: <field name="intern_ids" widget="many2many_tags"/>
                                 </div>
                             </div>
                         </div>
                         <footer>
-                            <button name="action_create_visit"
-                                    type="object"
-                                    string="New Visit"
-                                    class="btn btn-sm btn-link"/>
+                            <button name="action_create_visit" type="object"
+                                    string="New Visit" class="btn btn-sm btn-link"/>
                         </footer>
+                    </t>
+                    <t t-name="menu">
+                        <a role="menuitem" type="open" class="dropdown-item">Open</a>
+                        <a role="menuitem" type="archive" class="dropdown-item">Archive</a>
+                        <a role="menuitem" type="delete" class="dropdown-item">Delete</a>
                     </t>
                 </templates>
             </kanban>
