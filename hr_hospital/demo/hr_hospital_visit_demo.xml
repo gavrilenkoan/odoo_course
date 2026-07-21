@@ -8,9 +8,9 @@
         <field name="doctor_id" ref="doctor_1"/>
         <field name="patient_id" ref="patient_1"/>
         <field name="disease_id" ref="disease_flu"/>
-        <field name="summary"><![CDATA[
+        <field name="summary" type="html">
             <p>Patient recovered successfully.</p>
-        ]]></field>
+        </field>
     </record>
 
     <record id="visit_2" model="hospital.visit">
@@ -30,9 +30,9 @@
         <field name="doctor_id" ref="doctor_2"/>
         <field name="patient_id" ref="patient_2"/>
         <field name="disease_id" ref="disease_covid"/>
-        <field name="summary"><![CDATA[
+        <field name="summary" type="html">
             <p>Mild symptoms.</p>
-        ]]></field>
+        </field>
     </record>
 
     <record id="visit_4" model="hospital.visit">
@@ -60,9 +60,9 @@
         <field name="doctor_id" ref="doctor_1"/>
         <field name="patient_id" ref="patient_3"/>
         <field name="disease_id" ref="disease_flu"/>
-        <field name="summary"><![CDATA[
+        <field name="summary" type="html">
             <p>Routine examination completed.</p>
-        ]]></field>
+        </field>
     </record>
 
     <record id="visit_7" model="hospital.visit">
@@ -73,9 +73,9 @@
         <field name="doctor_id" ref="doctor_4"/>
         <field name="patient_id" ref="patient_4"/>
         <field name="disease_id" ref="disease_bacterial"/>
-        <field name="summary"><![CDATA[
+        <field name="summary" type="html">
             <p>Bacterial infection treated with a course of antibiotics.</p>
-        ]]></field>
+        </field>
     </record>
 
     <record id="visit_8" model="hospital.visit">
@@ -104,9 +104,9 @@
         <field name="doctor_id" ref="doctor_4"/>
         <field name="patient_id" ref="patient_7"/>
         <field name="disease_id" ref="disease_hypothyroidism"/>
-        <field name="summary"><![CDATA[
+        <field name="summary" type="html">
             <p>Hormone replacement therapy started; patient stable.</p>
-        ]]></field>
+        </field>
     </record>
 
     <record id="visit_11" model="hospital.visit">
@@ -126,9 +126,9 @@
         <field name="doctor_id" ref="doctor_6"/>
         <field name="patient_id" ref="patient_9"/>
         <field name="disease_id" ref="disease_pneumonia"/>
-        <field name="summary"><![CDATA[
+        <field name="summary" type="html">
             <p>Recovery confirmed; follow-up completed successfully.</p>
-        ]]></field>
+        </field>
     </record>
 
 </odoo>
