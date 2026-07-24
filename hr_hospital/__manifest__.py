@@ -46,6 +46,12 @@
         'static/description/icon.png',
     ],
 
+    'assets': {
+        'web.report_assets_common': [
+            'static/src/scss/hr_hospital_report.scss',
+        ],
+    },
+
     'installable': True,
     'auto_install': False,
 }

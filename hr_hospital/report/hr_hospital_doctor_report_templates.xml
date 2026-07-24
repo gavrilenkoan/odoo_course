@@ -6,8 +6,7 @@
                 <t t-set="company" t-value="res_company"/>
 
                 <div class="footer">
-                    <div class="text-center text-muted"
-                         style="border-top:1px solid #ccc; padding-top:4px; font-size:10px;">
+                    <div class="text-center text-muted o_hr_report_footer">
                         Printed:
                         <span t-out="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
                         <t t-if="company.partner_id.city"> | City: <span t-out="company.partner_id.city"/></t>
@@ -17,12 +16,11 @@
                 <div class="article" t-att-data-oe-model="doc._name" t-att-data-oe-id="doc.id">
                     <div class="page">
 
-                        <div style="margin-bottom:20px; padding-bottom:8px;
-                                    border-bottom:2px solid #495057; overflow:hidden;">
+                        <div class="o_hr_report_header">
                             <img t-if="company.logo" t-att-src="image_data_uri(company.logo)"
-                                 style="float:left; height:75px; width:auto;" alt="Logo"/>
-                            <div style="float:right; text-align:right; font-size:11px; line-height:1.4;">
-                                <div style="font-size:14px;"><strong t-out="company.name"/></div>
+                                 class="o_hr_report_logo" alt="Logo"/>
+                            <div class="o_hr_report_company">
+                                <div class="o_hr_report_company_name"><strong t-out="company.name"/></div>
                                 <div t-if="company.partner_id.street" t-out="company.partner_id.street"/>
                                 <div><t t-out="company.partner_id.city"/> <t t-out="company.partner_id.zip"/></div>
                                 <div t-if="company.phone">Tel: <t t-out="company.phone"/></div>
@@ -38,7 +36,7 @@
                         <h4>Visit history</h4>
                         <table class="table table-sm table-bordered">
                             <thead>
-                                <tr style="background-color:#e9ecef;">
+                                <tr class="o_hr_report_thead">
                                     <th style="width:16%;">Scheduled</th>
                                     <th style="width:16%;">Visit date</th>
                                     <th style="width:18%;">Patient</th>
@@ -49,15 +47,13 @@
                             <tbody>
                                 <tr t-foreach="doc.visit_ids.sorted(key=lambda v: v.scheduled_datetime or v.create_date, reverse=True)"
                                     t-as="visit">
-                                    <t t-set="status_color"
-                                       t-value="{'planned':'#ffe082','done':'#a5d6a7','cancelled':'#ef9a9a'}.get(visit.status)"/>
                                     <td><span t-field="visit.scheduled_datetime"
                                               t-options='{"widget":"datetime","format":"dd/MM/yyyy HH:mm"}'/></td>
                                     <td><span t-field="visit.visit_datetime"
                                               t-options='{"widget":"datetime","format":"dd/MM/yyyy HH:mm"}'/></td>
                                     <td><span t-field="visit.patient_id"/></td>
                                     <td><span t-field="visit.disease_id"/></td>
-                                    <td t-attf-style="background-color: {{ status_color }};">
+                                    <td t-attf-class="o_hr_status_{{ visit.status }}">
                                         <span t-field="visit.status"/>
                                     </td>
                                 </tr>
@@ -70,7 +66,7 @@
                         <h4 class="mt-4">Patients</h4>
                         <table class="table table-sm table-bordered">
                             <thead>
-                                <tr style="background-color:#e9ecef;">
+                                <tr class="o_hr_report_thead">
                                     <th>Full name</th>
                                     <th>Gender</th>
                                     <th>Birth date</th>
