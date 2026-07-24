@@ -3,6 +3,9 @@ from odoo.exceptions import ValidationError
 
 
 class HRHospitalVisit(models.Model):
+    """Patient visit to a doctor: schedule, status, disease, and summary,
+    with completed visits protected from changes."""
+
     _name = 'hospital.visit'
     _description = 'Hospital Visit'
 
@@ -54,6 +57,8 @@ class HRHospitalVisit(models.Model):
 
     @api.depends('disease_id')
     def _compute_current_disease_visit_count(self):
+        """Count all visits sharing this visit's disease into
+        ``current_disease_visit_count``."""
         visit_model = self.env['hospital.visit']
         for visit in self:
             if visit.disease_id:
@@ -64,6 +69,10 @@ class HRHospitalVisit(models.Model):
                 visit.current_disease_visit_count = 0
 
     def action_open_current_disease_visits(self):
+        """Open all visits with the same disease as this one.
+
+        :return: an ``ir.actions.act_window`` dict filtered by disease.
+        """
         self.ensure_one()
         action_name = self.env._('Visits')
         return {
@@ -75,6 +84,8 @@ class HRHospitalVisit(models.Model):
         }
 
     def action_done(self):
+        """Mark the visit(s) as completed and stamp the current date/time
+        as the visit date."""
         self.ensure_one()
         self.write({
             'status': 'done',
@@ -82,10 +93,18 @@ class HRHospitalVisit(models.Model):
         })
 
     def action_cancel(self):
+        """Set the status of the visit(s) to 'cancelled'."""
         self.ensure_one()
         self.write({'status': 'cancelled'})
 
     def write(self, vals):
+        """Protect completed visits.
+
+        :param vals: values to write.
+        :raises ValidationError: when archiving, or changing the doctor,
+            schedule, or visit date of a completed visit.
+        :return: the result of ``super().write``.
+        """
         protected = {
             "doctor_id",
             "scheduled_datetime",
@@ -103,6 +122,11 @@ class HRHospitalVisit(models.Model):
         return super().write(vals)
 
     def unlink(self):
+        """Prevent deletion of completed visits.
+
+        :raises ValidationError: if any record has status 'done'.
+        :return: the result of ``super().unlink``.
+        """
         for record in self:
             if record.status == "done":
                 raise ValidationError(self.env._('Completed visits cannot be deleted.'))

@@ -2,6 +2,9 @@ from odoo import fields, models
 
 
 class MassReassignDoctorWizard(models.TransientModel):
+    """Wizard to reassign many patients to a new doctor from a given date,
+    updating their assignment history."""
+
     _name = "mass.reassign.doctor.wizard"
     _description = "Mass Reassign Doctor Wizard"
 
@@ -16,6 +19,12 @@ class MassReassignDoctorWizard(models.TransientModel):
     )
 
     def action_reassign(self):
+        """Reassign all selected patients (``active_ids``) to the chosen
+        doctor: close the current history, add a new line, and, when the
+        date is not in the future, update the patients' current doctor.
+
+        :return: an action-window-close dict.
+        """
         self.ensure_one()
 
         patients = self.env['hospital.patient'].browse(self.env.context.get('active_ids', []))

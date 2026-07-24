@@ -2,6 +2,9 @@ from odoo import api, fields, models
 
 
 class HRHospitalPatient(models.Model):
+    """Hospital patient: personal data, current doctor, visits, and the
+    doctor-assignment history."""
+
     _name = 'hospital.patient'
     _description = 'Hospital Patient'
     _inherit = 'hospital.medic.info'
@@ -39,10 +42,15 @@ class HRHospitalPatient(models.Model):
 
     @api.depends('visit_ids')
     def _compute_visit_count(self):
+        """Count the patient's related visits into ``visit_count``."""
         for patient in self:
             patient.visit_count = len(patient.visit_ids)
 
     def action_view_visits(self):
+        """Open the list of this patient's visits.
+
+        :return: an ``ir.actions.act_window`` dict filtered by patient.
+        """
         self.ensure_one()
         action_name = self.env._('Visit History')
         return {
@@ -55,6 +63,11 @@ class HRHospitalPatient(models.Model):
         }
 
     def action_create_visit(self):
+        """Open a New Visit form pre-filled with this patient and their
+        personal doctor.
+
+        :return: an ``ir.actions.act_window`` dict (new visit form).
+        """
         self.ensure_one()
         action_name = self.env._('New Visit')
         return {
@@ -70,6 +83,12 @@ class HRHospitalPatient(models.Model):
         }
 
     def write(self, vals):
+        """Keep the doctor-assignment history in sync when ``doctor_id``
+        changes: close the current history line and open a new one.
+
+        :param vals: values to write.
+        :return: True. Skipped when the ``skip_history_sync`` context is set.
+        """
         if self.env.context.get('skip_history_sync'):
             return super().write(vals)
 

@@ -2,6 +2,9 @@ from odoo import Command, api, fields, models
 
 
 class DiseaseReportWizard(models.TransientModel):
+    """Wizard to build a visit report filtered by doctors, diseases, and a
+    date range."""
+
     _name = 'disease.report.wizard'
     _description = 'Disease Report Wizard'
 
@@ -20,6 +23,12 @@ class DiseaseReportWizard(models.TransientModel):
 
     @api.model
     def default_get(self, fields_list):
+        """Pre-fill doctors or diseases from the records selected in the UI
+        (``active_model`` / ``active_ids``).
+
+        :param fields_list: fields to compute defaults for.
+        :return: the defaults dict.
+        """
         res = super().default_get(fields_list)
         active_model = self.env.context.get('active_model')
         active_ids = self.env.context.get('active_ids', [])
@@ -30,6 +39,10 @@ class DiseaseReportWizard(models.TransientModel):
         return res
 
     def action_generate_report(self):
+        """Open the matching visits grouped by disease.
+
+        :return: an ``ir.actions.act_window`` dict.
+        """
         self.ensure_one()
 
         domain = []

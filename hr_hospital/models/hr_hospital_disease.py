@@ -3,6 +3,9 @@ from odoo.exceptions import ValidationError
 
 
 class HRHospitalDisease(models.Model):
+    """Hierarchical disease classifier (``_parent_store``) with parent and
+    sub-diseases and a full-path display name."""
+
     _name = 'hospital.disease'
     _description = 'Disease'
 
@@ -33,6 +36,8 @@ class HRHospitalDisease(models.Model):
     )
 
     def _compute_display_name(self):
+        """Build the display name as the full path from the root,
+        e.g. 'Respiratory / Viral / Flu'."""
         for record in self:
             names = []
             current = record
@@ -45,5 +50,9 @@ class HRHospitalDisease(models.Model):
 
     @api.constrains('parent_id')
     def _check_parent(self):
+        """Forbid recursive hierarchies.
+
+        :raises ValidationError: if a disease becomes its own ancestor.
+        """
         if self._has_cycle():
             raise ValidationError(self.env._('Recursive disease hierarchy is not allowed.'))
