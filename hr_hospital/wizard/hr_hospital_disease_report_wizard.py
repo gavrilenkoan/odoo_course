@@ -1,4 +1,4 @@
-from odoo import api, fields, models
+from odoo import Command, api, fields, models
 
 
 class DiseaseReportWizard(models.TransientModel):
@@ -24,9 +24,9 @@ class DiseaseReportWizard(models.TransientModel):
         active_model = self.env.context.get('active_model')
         active_ids = self.env.context.get('active_ids', [])
         if active_model == 'hospital.doctor':
-            res['doctor_ids'] = [(6, 0, active_ids)]
+            res['doctor_ids'] = [Command.set(active_ids)]
         elif active_model == 'hospital.disease':
-            res['disease_ids'] = [(6, 0, active_ids)]
+            res['disease_ids'] = [Command.set(active_ids)]
         return res
 
     def action_generate_report(self):

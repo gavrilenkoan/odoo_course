@@ -75,15 +75,15 @@ class HRHospitalVisit(models.Model):
         }
 
     def action_done(self):
-        for visit in self:
-            visit.write({
-                'status': 'done',
-                'visit_datetime': fields.Datetime.now(),
-            })
+        self.ensure_one()
+        self.write({
+            'status': 'done',
+            'visit_datetime': fields.Datetime.now(),
+        })
 
     def action_cancel(self):
-        for visit in self:
-            visit.status = 'cancelled'
+        self.ensure_one()
+        self.write({'status': 'cancelled'})
 
     def write(self, vals):
         protected = {

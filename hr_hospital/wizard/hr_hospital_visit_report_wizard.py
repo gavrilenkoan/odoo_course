@@ -1,4 +1,4 @@
-from odoo import api, fields, models
+from odoo import Command, api, fields, models
 
 
 class VisitReportWizard(models.TransientModel):
@@ -27,10 +27,10 @@ class VisitReportWizard(models.TransientModel):
         active_ids = self.env.context.get('active_ids', [])
 
         if active_model == 'hospital.doctor':
-            res['doctor_ids'] = [(6, 0, active_ids)]
+            res['doctor_ids'] = [Command.set(active_ids)]
 
         elif active_model == 'hospital.patient':
-            res['patient_ids'] = [(6, 0, active_ids)]
+            res['patient_ids'] = [Command.set(active_ids)]
 
         return res
 
