@@ -33,6 +33,22 @@
         </field>
     </record>
 
+    <record id="view_disease_search" model="ir.ui.view">
+        <field name="name">hospital.disease.search</field>
+        <field name="model">hospital.disease</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <searchpanel>
+                    <field name="parent_id"
+                           icon="fa-stethoscope"
+                           enable_counters="1"
+                           hierarchize="1"/>
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
     <record id="action_diseases" model="ir.actions.act_window">
         <field name="name">Diseases</field>
         <field name="type">ir.actions.act_window</field>

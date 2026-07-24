@@ -42,5 +42,5 @@ class HRHospitalDisease(models.Model):
 
     @api.constrains('parent_id')
     def _check_parent(self):
-        if not self._has_cycle():
+        if self._has_cycle():
             raise ValidationError('Recursive disease hierarchy is not allowed.')

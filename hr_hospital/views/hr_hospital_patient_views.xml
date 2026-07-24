@@ -20,18 +20,32 @@
         <field name="name">hospital.patient.form</field>
         <field name="model">hospital.patient</field>
         <field name="arch" type="xml">
-            <form>
+             <form>
                 <header>
-                        <button name="%(action_mass_reassign_doctor_wizard)d"
-                                string="Reassign Doctor"
-                                type="action"
-                                class="btn-primary"/>
-                    </header>
+                    <button name="action_create_visit"
+                            string="New Visit"
+                            type="object"
+                            class="btn-primary"/>
+                    <button name="%(action_mass_reassign_doctor_wizard)d"
+                            string="Reassign Doctor"
+                            type="action"/>
+                </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button"
+                                type="object"
+                                name="action_view_visits"
+                                icon="fa-stethoscope">
+                            <field name="visit_count"
+                                   widget="statinfo"
+                                   string="Visits"/>
+                        </button>
+                    </div>
                     <group>
                         <group string="Patient Information">
                             <field name="name"/>
                             <field name="doctor_id"/>
+                            <field name="phone"/>
                             <field name="insurance_policy_number"/>
                         </group>
                         <group string="Medical Information">
@@ -47,6 +61,20 @@
                     </group>
                 </sheet>
             </form>
+        </field>
+    </record>
+
+    <record id="view_patient_search" model="ir.ui.view">
+        <field name="name">hospital.patient.search</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"
+                       string="Name / Phone"
+                       filter_domain="['|', ('name', 'ilike', self), ('phone', 'ilike', self)]"/>
+                <field name="phone"/>
+                <field name="doctor_id"/>
+            </search>
         </field>
     </record>
 

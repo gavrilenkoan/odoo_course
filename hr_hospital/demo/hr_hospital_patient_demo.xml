@@ -27,4 +27,64 @@
         <field name="birth_date">1988-11-21</field>
     </record>
 
+    <record id="patient_4" model="hospital.patient">
+        <field name="name">Emily Clark</field>
+        <field name="doctor_id" ref="doctor_1"/>
+        <field name="phone">+380 67 214 5590</field>
+        <field name="insurance_policy_number">POL-100004</field>
+        <field name="blood_group">a_pos</field>
+        <field name="gender">female</field>
+        <field name="birth_date">1990-07-19</field>
+    </record>
+
+    <record id="patient_5" model="hospital.patient">
+        <field name="name">David Miller</field>
+        <field name="doctor_id" ref="doctor_3"/>
+        <field name="phone">+380 63 887 1204</field>
+        <field name="insurance_policy_number">POL-100005</field>
+        <field name="blood_group">o_pos</field>
+        <field name="gender">male</field>
+        <field name="birth_date">1985-12-02</field>
+    </record>
+
+    <record id="patient_6" model="hospital.patient">
+        <field name="name">Sophia Wilson</field>
+        <field name="doctor_id" ref="doctor_6"/>
+        <field name="phone">+380 50 331 7788</field>
+        <field name="insurance_policy_number">POL-100006</field>
+        <field name="blood_group">b_neg</field>
+        <field name="gender">female</field>
+        <field name="birth_date">1997-02-25</field>
+    </record>
+
+    <record id="patient_7" model="hospital.patient">
+        <field name="name">James Anderson</field>
+        <field name="doctor_id" ref="doctor_1"/>
+        <field name="phone">+380 67 902 4413</field>
+        <field name="insurance_policy_number">POL-100007</field>
+        <field name="blood_group">ab_pos</field>
+        <field name="gender">male</field>
+        <field name="birth_date">1979-10-11</field>
+    </record>
+
+    <record id="patient_8" model="hospital.patient">
+        <field name="name">Olivia Martinez</field>
+        <field name="doctor_id" ref="doctor_3"/>
+        <field name="phone">+380 93 118 6620</field>
+        <field name="insurance_policy_number">POL-100008</field>
+        <field name="blood_group">a_neg</field>
+        <field name="gender">female</field>
+        <field name="birth_date">2003-05-08</field>
+    </record>
+
+    <record id="patient_9" model="hospital.patient">
+        <field name="name">Daniel Thompson</field>
+        <field name="doctor_id" ref="doctor_6"/>
+        <field name="phone">+380 50 447 3095</field>
+        <field name="insurance_policy_number">POL-100009</field>
+        <field name="blood_group">o_pos</field>
+        <field name="gender">male</field>
+        <field name="birth_date">1993-08-30</field>
+    </record>
+
 </odoo>

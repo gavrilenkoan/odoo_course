@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class HRHospitalPatient(models.Model):
@@ -7,16 +7,13 @@ class HRHospitalPatient(models.Model):
     _inherit = 'hospital.medic.info'
 
     name = fields.Char(required=True)
+    insurance_policy_number = fields.Char(size=20)
+    phone = fields.Char()
     active = fields.Boolean(default=True)
 
     doctor_id = fields.Many2one(
         comodel_name='hospital.doctor',
         string='Personal Doctor',
-    )
-
-    insurance_policy_number = fields.Char(
-        string='Insurance Policy Number',
-        size=20,
     )
 
     visit_ids = fields.One2many(
@@ -30,6 +27,40 @@ class HRHospitalPatient(models.Model):
         inverse_name='patient_id',
         string='Doctor History',
     )
+
+    visit_count = fields.Integer(
+        compute='_compute_visit_count',
+    )
+
+    @api.depends('visit_ids')
+    def _compute_visit_count(self):
+        for patient in self:
+            patient.visit_count = len(patient.visit_ids)
+
+    def action_view_visits(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Visit History',
+            'res_model': 'hospital.visit',
+            'view_mode': 'list,form',
+            'domain': [('patient_id', '=', self.id)],
+            'context': {'default_patient_id': self.id},
+        }
+
+    def action_create_visit(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'New Visit',
+            'res_model': 'hospital.visit',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {
+                'default_patient_id': self.id,
+                'default_doctor_id': self.doctor_id.id,
+            },
+        }
 
     def write(self, vals):
         if self.env.context.get('skip_history_sync'):

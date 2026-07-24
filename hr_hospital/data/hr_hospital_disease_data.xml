@@ -54,4 +54,44 @@
         </field>
     </record>
 
+    <record id="disease_bacterial" model="hospital.disease">
+        <field name="name">Bacterial Diseases</field>
+        <field name="parent_id" ref="disease_respiratory"/>
+        <field name="description">
+            Infectious respiratory diseases caused by bacteria
+        </field>
+    </record>
+
+    <record id="disease_pneumonia" model="hospital.disease">
+        <field name="name">Pneumonia</field>
+        <field name="parent_id" ref="disease_bacterial"/>
+        <field name="description">
+            Inflammation of the lung tissue, often bacterial
+        </field>
+    </record>
+
+    <record id="disease_thyroid" model="hospital.disease">
+        <field name="name">Thyroid Disorders</field>
+        <field name="parent_id" ref="disease_metabolic"/>
+        <field name="description">
+            Disorders affecting thyroid hormone regulation
+        </field>
+    </record>
+
+    <record id="disease_hypothyroidism" model="hospital.disease">
+        <field name="name">Hypothyroidism</field>
+        <field name="parent_id" ref="disease_thyroid"/>
+        <field name="description">
+            Underactive thyroid with insufficient hormone production
+        </field>
+    </record>
+
+    <record id="disease_hyperthyroidism" model="hospital.disease">
+        <field name="name">Hyperthyroidism</field>
+        <field name="parent_id" ref="disease_thyroid"/>
+        <field name="description">
+            Overactive thyroid with excessive hormone production
+        </field>
+    </record>
+
 </odoo>

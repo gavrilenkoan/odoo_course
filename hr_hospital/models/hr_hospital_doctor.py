@@ -7,6 +7,11 @@ class HRHospitalDoctor(models.Model):
     _description = 'Hospital Doctor'
     _inherit = 'hospital.medic.info'
 
+    image_url = fields.Char(
+        string='Photo',
+        default='https://cdn.pixabay.com/photo/2017/06/17/04/17/doctor-2411135_1280.png',
+    )
+
     name = fields.Char(required=True)
     active = fields.Boolean(default=True)
 
@@ -33,6 +38,12 @@ class HRHospitalDoctor(models.Model):
         string='Mentor',
     )
 
+    intern_ids = fields.One2many(
+        comodel_name='hospital.doctor',
+        inverse_name='mentor_id',
+        string='Interns',
+    )
+
     patient_ids = fields.One2many(
         comodel_name='hospital.patient',
         inverse_name='doctor_id',
@@ -44,6 +55,17 @@ class HRHospitalDoctor(models.Model):
         inverse_name='doctor_id',
         string='Visits',
     )
+
+    def action_create_visit(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'New Visit',
+            'res_model': 'hospital.visit',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {'default_doctor_id': self.id},
+        }
 
     @api.depends('category_id')
     def _compute_is_intern(self):

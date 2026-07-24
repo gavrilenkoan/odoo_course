@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -47,6 +47,43 @@ class HRHospitalVisit(models.Model):
         comodel_name='hospital.disease',
         string='Disease',
     )
+
+    current_disease_visit_count = fields.Integer(
+        compute='_compute_current_disease_visit_count',
+    )
+
+    @api.depends('disease_id')
+    def _compute_current_disease_visit_count(self):
+        visit_model = self.env['hospital.visit']
+        for visit in self:
+            if visit.disease_id:
+                visit.current_disease_visit_count = visit_model.search_count([
+                    ('disease_id', '=', visit.disease_id.id)
+                ])
+            else:
+                visit.current_disease_visit_count = 0
+
+    def action_open_current_disease_visits(self):
+        self.ensure_one()
+
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Visits',
+            'res_model': 'hospital.visit',
+            'view_mode': 'list,form',
+            'domain': [('disease_id', '=', self.disease_id.id)],
+        }
+
+    def action_done(self):
+        self.ensure_one()
+        self.write({
+            'status': 'done',
+            'visit_datetime': fields.Datetime.now(),
+        })
+
+    def action_cancel(self):
+        self.ensure_one()
+        self.write({'status': 'cancelled'})
 
     def write(self, vals):
         protected = {

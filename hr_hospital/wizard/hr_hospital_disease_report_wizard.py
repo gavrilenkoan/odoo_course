@@ -1,66 +1,52 @@
 from odoo import Command, api, fields, models
 
 
-class VisitReportWizard(models.TransientModel):
-    _name = "visit.report.wizard"
-    _description = 'Visit Report Wizard'
+class DiseaseReportWizard(models.TransientModel):
+    _name = 'disease.report.wizard'
+    _description = 'Disease Report Wizard'
 
-    doctor_ids = fields.Many2many("hospital.doctor")
-
-    patient_ids = fields.Many2many("hospital.patient")
-
-    date_from = fields.Date()
-
-    date_to = fields.Date()
-
-    completed_only = fields.Boolean()
-
-    disease_id = fields.Many2one(
-        "hospital.disease"
+    doctor_ids = fields.Many2many(
+        comodel_name='hospital.doctor',
+        string='Doctors',
     )
 
-    @api.model
-    def default_get(self, fields):
-        res = super().default_get(fields)
+    disease_ids = fields.Many2many(
+        comodel_name='hospital.disease',
+        string='Diseases',
+    )
 
+    date_from = fields.Date()
+    date_to = fields.Date()
+
+    @api.model
+    def default_get(self, fields_list):
+        res = super().default_get(fields_list)
         active_model = self.env.context.get('active_model')
         active_ids = self.env.context.get('active_ids', [])
-
         if active_model == 'hospital.doctor':
             res['doctor_ids'] = [Command.set(active_ids)]
-
-        elif active_model == 'hospital.patient':
-            res['patient_ids'] = [Command.set(active_ids)]
-
+        elif active_model == 'hospital.disease':
+            res['disease_ids'] = [Command.set(active_ids)]
         return res
 
     def action_generate_report(self):
         self.ensure_one()
 
         domain = []
-
         if self.doctor_ids:
             domain.append(('doctor_id', 'in', self.doctor_ids.ids))
-
-        if self.patient_ids:
-            domain.append(('patient_id', 'in', self.patient_ids.ids))
-
+        if self.disease_ids:
+            domain.append(('disease_id', 'child_of', self.disease_ids.ids))
         if self.date_from:
             domain.append(('scheduled_datetime', '>=', self.date_from))
-
         if self.date_to:
             domain.append(('scheduled_datetime', '<=', self.date_to))
 
-        if self.completed_only:
-            domain.append(('status', '=', 'done'))
-
-        if self.disease_id:
-            domain.append(('disease_id', '=', self.disease_id.id))
-
         return {
             'type': 'ir.actions.act_window',
-            'name': 'Visits',
+            'name': 'Disease Report',
             'res_model': 'hospital.visit',
             'view_mode': 'list,form',
             'domain': domain,
+            'context': {'search_default_group_disease': 1},
         }
