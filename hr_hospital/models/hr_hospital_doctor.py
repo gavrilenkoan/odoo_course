@@ -60,7 +60,7 @@ class HRHospitalDoctor(models.Model):
         self.ensure_one()
         return {
             'type': 'ir.actions.act_window',
-            'name': 'New Visit',
+            'name': self.env._('New Visit'),
             'res_model': 'hospital.visit',
             'view_mode': 'form',
             'target': 'new',
@@ -86,7 +86,7 @@ class HRHospitalDoctor(models.Model):
     def _check_mentor(self):
         for record in self:
             if record.mentor_id and record.mentor_id.is_intern:
-                raise ValidationError('The selected mentor cannot be an intern.')
+                raise ValidationError(self.env._('The selected mentor cannot be an intern.'))
 
             if record.is_intern and not record.mentor_id:
-                raise ValidationError('An intern must have a mentor.')
+                raise ValidationError(self.env._('An intern must have a mentor.'))

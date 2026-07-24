@@ -9,10 +9,13 @@ class HRHospitalDisease(models.Model):
     _parent_name = "parent_id"
     _parent_store = True
 
-    name = fields.Char(required=True)
-    active = fields.Boolean(default=True)
+    name = fields.Char(
+        required=True,
+        translate=True,
+    )
 
-    description = fields.Text()
+    description = fields.Text(translate=True)
+    active = fields.Boolean(default=True)
 
     parent_id = fields.Many2one(
         comodel_name='hospital.disease',
@@ -43,4 +46,4 @@ class HRHospitalDisease(models.Model):
     @api.constrains('parent_id')
     def _check_parent(self):
         if self._has_cycle():
-            raise ValidationError('Recursive disease hierarchy is not allowed.')
+            raise ValidationError(self.env._('Recursive disease hierarchy is not allowed.'))

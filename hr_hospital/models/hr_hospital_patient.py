@@ -44,9 +44,10 @@ class HRHospitalPatient(models.Model):
 
     def action_view_visits(self):
         self.ensure_one()
+        action_name = self.env._('Visit History')
         return {
             'type': 'ir.actions.act_window',
-            'name': 'Visit History',
+            'name': action_name,
             'res_model': 'hospital.visit',
             'view_mode': 'list,form',
             'domain': [('patient_id', '=', self.id)],
@@ -55,9 +56,10 @@ class HRHospitalPatient(models.Model):
 
     def action_create_visit(self):
         self.ensure_one()
+        action_name = self.env._('New Visit')
         return {
             'type': 'ir.actions.act_window',
-            'name': 'New Visit',
+            'name': action_name,
             'res_model': 'hospital.visit',
             'view_mode': 'form',
             'target': 'new',

@@ -66,7 +66,7 @@ class HRHospitalDoctorHistory(models.Model):
 
     def _check_date_order(self):
         if self.assignment_date and self.change_date and self.change_date < self.assignment_date:
-            raise ValidationError('The change date cannot be earlier than the assignment date.')
+            raise ValidationError(self.env._('The change date cannot be earlier than the assignment date.'))
 
     def _check_overlapping_history(self):
         self.ensure_one()
@@ -84,11 +84,13 @@ class HRHospitalDoctorHistory(models.Model):
             end2 = other.change_date or date.max
 
             if start1 < end2 and start2 < end1:
-                raise ValidationError(
-                    f'This assignment overlaps the existing assignment '
-                    f'from {other.assignment_date} to {other.change_date or "ongoing"} '
-                    f'for doctor "{other.doctor_id.name}".'
-                )
+                raise ValidationError(self.env._(
+                    'This assignment overlaps the existing assignment '
+                    'from %(start)s to %(end)s for doctor "%(doctor)s".',
+                    start=other.assignment_date,
+                    end=other.change_date or self.env._('ongoing'),
+                    doctor=other.doctor_id.name,
+                ))
 
     @api.model_create_multi
     def create(self, vals_list):

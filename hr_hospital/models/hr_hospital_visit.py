@@ -65,10 +65,10 @@ class HRHospitalVisit(models.Model):
 
     def action_open_current_disease_visits(self):
         self.ensure_one()
-
+        action_name = self.env._('Visits')
         return {
             'type': 'ir.actions.act_window',
-            'name': 'Visits',
+            'name': action_name,
             'res_model': 'hospital.visit',
             'view_mode': 'list,form',
             'domain': [('disease_id', '=', self.disease_id.id)],
@@ -95,15 +95,15 @@ class HRHospitalVisit(models.Model):
         for record in self:
             if record.status == "done":
                 if vals.get('active') is False:
-                    raise ValidationError('Completed visits cannot be archived.')
+                    raise ValidationError(self.env._('Completed visits cannot be archived.'))
 
                 if protected.intersection(vals):
-                    raise ValidationError('Completed visits cannot be modified.')
+                    raise ValidationError(self.env._('Completed visits cannot be modified.'))
 
         return super().write(vals)
 
     def unlink(self):
         for record in self:
             if record.status == "done":
-                raise ValidationError('Completed visits cannot be deleted.')
+                raise ValidationError(self.env._('Completed visits cannot be deleted.'))
         return super().unlink()
