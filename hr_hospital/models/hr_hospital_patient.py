@@ -11,6 +11,11 @@ class HRHospitalPatient(models.Model):
     phone = fields.Char()
     active = fields.Boolean(default=True)
 
+    user_id = fields.Many2one(
+        comodel_name='res.users',
+        string='System User',
+    )
+
     doctor_id = fields.Many2one(
         comodel_name='hospital.doctor',
         string='Personal Doctor',

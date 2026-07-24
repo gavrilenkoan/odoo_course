@@ -1,10 +1,11 @@
 # noinspection PyStatementEffect
 {
     'name': 'HR Hospital',
-    'summary': 'hr hospital system',
-    'author': 'gavrilenko_an',
-    'category': 'Human Resources',
     'version': '19.0.1.0.0',
+    'category': 'Human Resources',
+    'summary': 'hr hospital system',
+    'license': 'LGPL-3',
+    'author': 'gavrilenko_an',
 
     'depends': [
         'base',
@@ -12,7 +13,9 @@
     ],
 
     'data': [
+        'security/hr_hospital_groups.xml',
         'security/ir.model.access.csv',
+        'security/hr_hospital_security.xml',
 
         'wizard/hr_hospital_mass_reassign_doctor_wizard_views.xml',
         'wizard/hr_hospital_visit_report_wizard_views.xml',

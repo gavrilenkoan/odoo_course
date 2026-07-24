@@ -1,0 +1,36 @@
+<odoo noupdate="1">
+    <record id="rule_visit_patient_own" model="ir.rule">
+        <field name="name">Visit: patient own (read)</field>
+        <field name="model_id" ref="model_hospital_visit"/>
+        <field name="groups" eval="[(4, ref('group_hospital_patient'))]"/>
+        <field name="domain_force">[('patient_id.user_id', '=', user.id)]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <record id="rule_visit_intern_own" model="ir.rule">
+        <field name="name">Visit: intern own</field>
+        <field name="model_id" ref="model_hospital_visit"/>
+        <field name="groups" eval="[(4, ref('group_hospital_intern'))]"/>
+        <field name="domain_force">[('doctor_id.user_id', '=', user.id)]</field>
+    </record>
+
+    <record id="rule_visit_doctor_team" model="ir.rule">
+        <field name="name">Visit: doctor + interns</field>
+        <field name="model_id" ref="model_hospital_visit"/>
+        <field name="groups" eval="[(4, ref('group_hospital_doctor'))]"/>
+        <field name="domain_force">
+            ['|', ('doctor_id.user_id', '=', user.id),
+                  ('doctor_id.mentor_id.user_id', '=', user.id)]
+        </field>
+    </record>
+
+    <record id="rule_visit_manager_all" model="ir.rule">
+        <field name="name">Visit: manager all</field>
+        <field name="model_id" ref="model_hospital_visit"/>
+        <field name="groups" eval="[(4, ref('group_hospital_manager'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+</odoo>
