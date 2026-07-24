@@ -7,6 +7,6 @@
 
 .o_hr_report_thead        { background-color: #e9ecef; }
 
-.o_hr_status_planned      { background-color: #ffe082; }
-.o_hr_status_done         { background-color: #a5d6a7; }
-.o_hr_status_cancelled    { background-color: #ef9a9a; }
+.table td.o_hr_status_planned      { background-color: #ffe082; }
+.table td.o_hr_status_done         { background-color: #a5d6a7; }
+.table td.o_hr_status_cancelled    { background-color: #ef9a9a; }

@@ -48,7 +48,7 @@
 
     'assets': {
         'web.report_assets_common': [
-            'static/src/scss/hr_hospital_report.scss',
+            'hr_hospital/static/src/scss/hr_hospital_report.scss',
         ],
     },
 
