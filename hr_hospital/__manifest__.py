@@ -1,11 +1,23 @@
-# noinspection PyStatementEffect
 {
     'name': 'HR Hospital',
     'version': '19.0.1.0.0',
     'category': 'Human Resources',
-    'summary': 'hr hospital system',
-    'license': 'LGPL-3',
+    'summary': 'Manage doctors, patients, visits, diseases and medical history',
     'author': 'gavrilenko_an',
+    'website': 'https://github.com/gavrilenkoan/odoo_course',
+    'license': 'LGPL-3',
+    'application': True,
+
+    'images': [
+        'static/description/banner.png',
+        'static/description/icon.png',
+    ],
+
+    'assets': {
+        'web.report_assets_common': [
+            'hr_hospital/static/src/scss/hr_hospital_report.scss',
+        ],
+    },
 
     'depends': [
         'base',
@@ -44,16 +56,6 @@
         'demo/hr_hospital_visit_demo.xml',
         'demo/hr_hospital_doctor_history_demo.xml',
     ],
-
-    'images': [
-        'static/description/icon.png',
-    ],
-
-    'assets': {
-        'web.report_assets_common': [
-            'hr_hospital/static/src/scss/hr_hospital_report.scss',
-        ],
-    },
 
     'installable': True,
     'auto_install': False,
