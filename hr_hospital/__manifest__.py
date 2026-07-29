@@ -8,6 +8,7 @@
 
     'depends': [
         'base',
+        'web',
     ],
 
     'data': [
@@ -25,6 +26,9 @@
         'views/hr_hospital_doctor_category_views.xml',
         'views/hr_hospital_doctor_history_views.xml',
 
+        'report/hr_hospital_doctor_reports.xml',
+        'report/hr_hospital_doctor_report_templates.xml',
+
         'data/hr_hospital_disease_data.xml',
         'data/hr_hospital_doctor_category_data.xml',
 
@@ -41,6 +45,12 @@
     'images': [
         'static/description/icon.png',
     ],
+
+    'assets': {
+        'web.report_assets_common': [
+            'hr_hospital/static/src/scss/hr_hospital_report.scss',
+        ],
+    },
 
     'installable': True,
     'auto_install': False,
