@@ -15,22 +15,21 @@ Features
 * Doctor-assignment history synced with the patient's current doctor
 * Role-based security (Patient, Intern, Doctor, Manager, Administrator)
 * QWeb PDF doctor report and a Kanban board
-* Report wizards (visits, diseases) and mass doctor reassignment
-* Ukrainian translation
+* Report wizards and a Ukrainian translation
 
 Installation
 ============
 
 To install this module, you need to:
 
-1. Clone the repository into your addons path.
-2. Add the repository path to the Odoo configuration file.
-3. Update the apps list.
-4. Install the **HR Hospital** module.
+#. Clone the repository into your addons path.
+#. Add the repository path to the Odoo configuration file.
+#. Update the apps list.
+#. Install the **HR Hospital** module.
 
 Usage
 =====
 
-1. Open the **Hospital** menu.
-2. Create doctors, patients and diseases.
-3. Schedule visits and manage their status.
+#. Open the **Hospital** menu.
+#. Create doctors, patients and diseases.
+#. Schedule visits and manage their status.
