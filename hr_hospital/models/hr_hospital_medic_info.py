@@ -2,6 +2,9 @@ from odoo import api, fields, models
 
 
 class HospitalMedicInfo(models.AbstractModel):
+    """Abstract mixin with common medical data (blood group, gender, birth
+    date, computed age) shared by doctors and patients."""
+
     _name = "hospital.medic.info"
     _description = "Medical Information"
 
@@ -38,6 +41,10 @@ class HospitalMedicInfo(models.AbstractModel):
 
     @api.depends('birth_date')
     def _compute_age(self):
+        """Compute the number of full years between ``birth_date`` and today.
+
+        :return: None. Sets ``age`` to 0 when ``birth_date`` is empty.
+        """
         today = fields.Date.today()
 
         for record in self:

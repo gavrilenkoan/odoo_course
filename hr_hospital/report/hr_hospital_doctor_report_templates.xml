@@ -5,14 +5,6 @@
             <t t-foreach="docs" t-as="doc">
                 <t t-set="company" t-value="res_company"/>
 
-                <div class="footer">
-                    <div class="text-center text-muted o_hr_report_footer">
-                        Printed:
-                        <span t-out="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
-                        <t t-if="company.partner_id.city"> | City: <span t-out="company.partner_id.city"/></t>
-                    </div>
-                </div>
-
                 <div class="article" t-att-data-oe-model="doc._name" t-att-data-oe-id="doc.id">
                     <div class="page">
 
@@ -88,7 +80,16 @@
 
                     </div>
                 </div>
+
+                <div class="footer">
+                    <div class="text-center text-muted o_hr_report_footer">
+                        Printed:
+                        <span t-out="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
+                        <t t-if="company.partner_id.city"> | City: <span t-out="company.partner_id.city"/></t>
+                    </div>
+                </div>
             </t>
+
         </t>
     </template>
 

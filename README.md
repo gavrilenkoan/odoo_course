@@ -47,6 +47,8 @@ Implements a hospital management system for managing doctors, patients, diseases
 - `demo/` – demo data (doctors, patients, visits)
 - `static/` – resources
 - `report/` – report templates
+- `tests/` - tests
+- `i18n/` - translations
 - `__manifest__.py` – module definition
 
 ### Report Example
